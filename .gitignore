@@ -1,0 +1,29 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build artifacts
+/pocketful
+/bin/
+
+# Test output
+*.test
+*.out
+
+# Environment variables (keep .env.example, ignore actual .env)
+# .env   <-- uncomment this line in production
+
+# Uploads directory (local document storage)
+uploads/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
