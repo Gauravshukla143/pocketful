@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocketful KYC</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <div class="glass-panel" id="auth-panel">
+        <h1 class="gradient-text">Pocketful KYC</h1>
+        <p class="subtitle">Secure, fast, and reliable verification.</p>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('login')">Login</button>
+            <button class="tab" onclick="switchTab('register')">Register</button>
+        </div>
+
+        <form id="auth-form" onsubmit="handleAuth(event)">
+            <div class="input-group">
+                <input type="email" id="email" required placeholder="Email Address">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" required placeholder="Password">
+            </div>
+            <button type="submit" class="btn-primary" id="auth-btn">Login</button>
+        </form>
+        <p id="admin-hint">Admin? Login with admin@pocketful.com</p>
+    </div>
+
+    <div class="glass-panel hidden" id="dashboard-panel">
+        <div class="header">
+            <h2 class="gradient-text">Welcome, <span id="user-email-display">User</span></h2>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+        
+        <div class="status-card">
+            <h3>KYC Status</h3>
+            <div class="badge" id="kyc-status-badge">NOT INITIATED</div>
+            <button class="btn-primary hidden" id="initiate-btn" onclick="initiateKYC()">Start KYC Now</button>
+        </div>
+
+        <div id="upload-section" class="hidden">
+            <h3>Upload Documents</h3>
+            <p class="subtitle">All three documents are required.</p>
+            <div class="upload-grid">
+                <div class="upload-box" id="box-PAN">
+                    <h4>PAN Card</h4>
+                    <input type="text" id="pan-number" placeholder="ABCDE1234F" class="doc-input">
+                    <input type="file" id="file-PAN" accept="image/*">
+                    <button class="btn-secondary" onclick="uploadDoc('PAN')">Upload</button>
+                </div>
+                <div class="upload-box" id="box-AADHAAR">
+                    <h4>Aadhaar Card</h4>
+                    <input type="text" id="aadhaar-number" placeholder="12 Digit Number" class="doc-input">
+                    <input type="file" id="file-AADHAAR" accept="image/*">
+                    <button class="btn-secondary" onclick="uploadDoc('AADHAAR')">Upload</button>
+                </div>
+                <div class="upload-box" id="box-SELFIE">
+                    <h4>Selfie</h4>
+                    <input type="file" id="file-SELFIE" accept="image/*">
+                    <button class="btn-secondary" onclick="uploadDoc('SELFIE')">Upload</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-section" class="hidden">
+            <h3 class="gradient-text">Admin Panel</h3>
+            <div class="admin-box">
+                <input type="text" id="verify-kyc-id" placeholder="Paste KYC ID here">
+                <div style="display:flex; gap: 10px; margin-top:10px;">
+                    <button class="btn-success" onclick="verifyKYC('APPROVE')">Approve</button>
+                    <button class="btn-danger" onclick="verifyKYC('REJECT')">Reject</button>
+                </div>
+                <input type="text" id="rejection-note" placeholder="Rejection note (if rejecting)" style="margin-top:10px; width:100%;">
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

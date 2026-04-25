@@ -25,6 +25,12 @@ func Setup(router *gin.Engine) {
 	kycHandler := handler.NewKYCHandler(kycService)
 	adminHandler := handler.NewAdminHandler(kycService)
 
+	// ── Serve Frontend UI ─────────────────────────────────────────────────────
+	router.Static("/ui", "./public")
+	router.GET("/", func(c *gin.Context) {
+		c.Redirect(302, "/ui/index.html")
+	})
+
 	// ── Health Check ──────────────────────────────────────────────────────────
 	router.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok", "service": "pocketful-kyc"})
